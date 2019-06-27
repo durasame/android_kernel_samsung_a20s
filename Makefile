@@ -527,6 +527,7 @@ KBUILD_CFLAGS += $(call cc-disable-warning, duplicate-decl-specifier)
 KBUILD_CFLAGS += $(call cc-disable-warning, undefined-optimized)
 KBUILD_CFLAGS += $(call cc-disable-warning, tautological-constant-out-of-range-compare)
 KBUILD_CFLAGS += $(call cc-disable-warning, return-type)
+KBUILD_CFLAGS += $(call cc-disable-warning, psabi)
 KBUILD_CFLAGS += $(call cc-option,-fno-builtin-bcmp,)
 
 # Quiet clang warning: comparison of unsigned expression < 0 is always false
