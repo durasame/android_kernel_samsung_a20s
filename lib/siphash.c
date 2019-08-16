@@ -5,7 +5,9 @@
  * SipHash: a fast short-input PRF
  * https://131002.net/siphash/
  *
- * This implementation is specifically for SipHash2-4.
+ * This implementation is specifically for SipHash2-4 for a secure PRF
+ * and HalfSipHash1-3/SipHash1-3 for an insecure PRF only suitable for
+ * hashtables.
  */
 
 #include <linux/siphash.h>

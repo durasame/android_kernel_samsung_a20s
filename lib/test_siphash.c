@@ -7,7 +7,9 @@
  * SipHash: a fast short-input PRF
  * https://131002.net/siphash/
  *
- * This implementation is specifically for SipHash2-4.
+ * This implementation is specifically for SipHash2-4 for a secure PRF
+ * and HalfSipHash1-3/SipHash1-3 for an insecure PRF only suitable for
+ * hashtables.
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -18,8 +20,8 @@
 #include <linux/errno.h>
 #include <linux/module.h>
 
-/* Test vectors taken from official reference source available at:
- *     https://131002.net/siphash/siphash24.c
+/* Test vectors taken from reference source available at:
+ *     https://github.com/veorq/SipHash
  */
 
 static const siphash_key_t test_key_siphash =
