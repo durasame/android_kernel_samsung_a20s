@@ -50,3 +50,6 @@ if [ "${WITH_OUTDIR}" == true ]; then
    "${CCACHE}" make O=out $KERNEL_MAKE_ENV KCFLAGS=-mno-android a20s_defconfig
    "${CCACHE}" make -j18 O=out $KERNEL_MAKE_ENV KCFLAGS=-mno-android
 fi
+
+# Create dtbo.img
+tools/mkdtimg create out/arch/arm64/boot/dtbo.img --page_size=2048 $(find out -name "*.dtbo")
