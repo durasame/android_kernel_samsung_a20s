@@ -7,6 +7,7 @@
 #include <linux/fs.h>
 #include <linux/slab.h>
 #include <linux/export.h>
+#include <linux/module.h>
 #include <linux/namei.h>
 #include <linux/sched.h>
 #include <linux/writeback.h>
