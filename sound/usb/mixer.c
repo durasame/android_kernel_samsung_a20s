@@ -868,7 +868,7 @@ static int __check_input_term(struct mixer_build *state, int id,
 }
 
 
-static int check_input_term(struct mixer_build *state, int id,
+int check_input_term(struct mixer_build *state, int id,
 			    struct usb_audio_term *term)
 {
 	memset(term, 0, sizeof(*term));
