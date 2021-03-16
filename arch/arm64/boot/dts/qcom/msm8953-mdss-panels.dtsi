@@ -34,6 +34,7 @@
 #include "dsi-panel-ili9881h-hlt-hdp-video.dtsi"
 #include "dsi-panel-ili9881h-inl-hdp-video.dtsi"
 #include "dsi-panel-ili9881h-inx-hdp-video.dtsi"
+#include "dsi-panel-ili9882n-hlt-hdp-video.dtsi"
 
 &soc {
 	dsi_panel_pwr_supply: dsi_panel_pwr_supply {
