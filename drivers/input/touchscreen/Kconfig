@@ -1467,6 +1467,17 @@ config TOUCHSCREEN_ILI9881H
 
 source "drivers/input/touchscreen/ili9881h/Kconfig"
 
+config TOUCHSCREEN_ILI9882N
+	bool "ili9882n Touchscreen Driver"
+	depends on SPI
+	help
+	  Say Y here if you have a Himax CHIPSET touchscreen.
+	  HIMAX controllers are multi touch controllers which can
+	  report 10 touches at a time.
+
+          If unsure, say N.
+source "drivers/input/touchscreen/ili9882n/Kconfig"
+
 config TOUCHSCREEN_EKTF3XXX_CHIPSET
 	bool "Elan EKTF3XXX touchpanel CHIPSET"
 	depends on I2C
