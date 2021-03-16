@@ -248,7 +248,7 @@ static void mdss_dsi_panel_bklt_dcs(struct mdss_dsi_ctrl_pdata *ctrl, int level)
 
 	pr_debug("%s: level=%d\n", __func__, level);
 /* bug 450537, wangminglin.wt, 2019/0612, Modify panel timming, start*/
-	if (strncmp(ctrl->panel_data.panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0) {
+	if (strncmp(ctrl->panel_data.panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0 || strncmp(ctrl->panel_data.panel_info.panel_name, "ili9882n", strlen("ili9882n")) == 0) {
 
 		if (level == 1)
             level = 33;  // let the minimum brightness reach 3nit
@@ -564,7 +564,7 @@ int mdss_dsi_panel_reset(struct mdss_panel_data *pdata, int enable)
 			gpio_free(ctrl_pdata->disp_en_gpio);
 		}
 /* bug 450537, wangminglin.wt, 2019/0612, Modify panel timming, start*/
-		if ((strncmp(pdata->panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0) || (strncmp(pdata->panel_info.panel_name, "nt36525b", strlen("nt36525b")) == 0))
+		if ((strncmp(pdata->panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0) || (strncmp(pdata->panel_info.panel_name, "ili9882n", strlen("ili9882n")) == 0) || (strncmp(pdata->panel_info.panel_name, "nt36525b", strlen("nt36525b")) == 0))
 			pr_err("%s:  reset not do 0 when display off \n", __func__);
 		else
 			gpio_set_value((ctrl_pdata->rst_gpio), 0);
