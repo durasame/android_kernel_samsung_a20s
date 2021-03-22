@@ -17,7 +17,11 @@ export SUBARCH="arm64"
 export ANDROID_MAJOR_VERSION="q"
 
 # Export CCACHE
-export CCACHE="$(which ccache)"
+export CCACHE_EXEC="$(which ccache)"
+export CCACHE="${CCACHE_EXEC}"
+export CCACHE_COMPRESS="1"
+export USE_CCACHE="1"
+ccache -M 50G
 
 # Export toolchain/cross flags
 export TOOLCHAIN="aarch64-linux-android-"
