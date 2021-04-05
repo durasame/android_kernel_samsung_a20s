@@ -6,8 +6,8 @@ if [ ! -d "$(pwd)/toolchain/" ]; then
 fi
 
 # Export KBUILD flags
-export KBUILD_BUILD_USER="yukosky"
-export KBUILD_BUILD_HOST="a2XX-Team"
+export KBUILD_BUILD_USER="$(whoami)"
+export KBUILD_BUILD_HOST="$(uname -n)"
 
 # Export ARCH/SUBARCH flags
 export ARCH="arm64"
