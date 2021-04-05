@@ -2,7 +2,7 @@
 
 # Check if have toolchain folder
 if [ ! -d "$(pwd)/toolchain/" ]; then
-   git clone https://github.com/a2XX-dev/toolchains.git toolchain -b gcc
+   git clone https://github.com/a2XX-dev/toolchains.git toolchain -b linaro-7.5.0
 fi
 
 # Export KBUILD flags
@@ -24,7 +24,7 @@ export USE_CCACHE="1"
 ccache -M 50G
 
 # Export toolchain/cross flags
-export TOOLCHAIN="aarch64-linux-android-"
+export TOOLCHAIN="aarch64-linux-gnu-"
 export CROSS_COMPILE="$(pwd)/toolchain/bin/${TOOLCHAIN}"
 
 # Export DTC_EXT
@@ -51,8 +51,8 @@ if [ "${WITH_OUTDIR}" == true ]; then
 fi
 
 if [ "${WITH_OUTDIR}" == true ]; then
-   "${CCACHE}" make O=out $KERNEL_MAKE_ENV KCFLAGS=-mno-android a20s_defconfig
-   "${CCACHE}" make -j18 O=out $KERNEL_MAKE_ENV KCFLAGS=-mno-android
+   "${CCACHE}" make O=out $KERNEL_MAKE_ENV a20s_defconfig
+   "${CCACHE}" make -j18 O=out $KERNEL_MAKE_ENV
 fi
 
 # Create dtbo.img
