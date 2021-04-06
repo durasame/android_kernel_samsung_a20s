@@ -133,7 +133,7 @@ static int msm_secure_map(struct io_pgtable_ops *ops, unsigned long iova,
 	void *flush_va, *flush_va_end;
 	struct scm_desc desc = {0};
 	int ret = -EINVAL;
-	u32 resp;
+	u32 resp = 0;
 
 	if (!IS_ALIGNED(iova, SZ_1M) || !IS_ALIGNED(paddr, SZ_1M) ||
 			!IS_ALIGNED(size, SZ_1M))
@@ -203,7 +203,7 @@ static int msm_secure_map_sg(struct io_pgtable_ops *ops, unsigned long iova,
 	unsigned long len = 0;
 	struct scm_desc desc = {0};
 	int i;
-	u32 resp;
+	u32 resp = 0;
 
 	for_each_sg(sg, tmp, nents, i)
 		len += tmp->length;
