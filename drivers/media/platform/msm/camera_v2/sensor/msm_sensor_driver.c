@@ -131,8 +131,10 @@ void msm_sensor_set_info(int event,void* buf)
 			s_name = m_mod_truly;
 			cam_num = 3;
 	  }
- 	  else
+ 	  else {
 	        hardwareinfo_set_prop(HARDWARE_BACK_CAM_MOUDULE_ID,unknown);
+	   }
+
 		break;
 	case 0x11:
 	      pr_err("otp module info debug e_buf[0] = 0x%x, e_buf[1] = 0x%x, e_buf[1+8] = 0x%x,  e_buf[1+16] = 0x%x", e_buf[0], e_buf[1], e_buf[1+8], e_buf[1+16]);
