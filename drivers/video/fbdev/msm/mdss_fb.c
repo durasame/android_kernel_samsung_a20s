@@ -3039,11 +3039,12 @@ static int __mdss_fb_wait_for_fence_sub(struct msm_sync_pt_data *sync_pt_data,
 		 * fence is already signalled. If not signalled it breaks
 		 * in the final wait timeout.
 		 */
-		if (wait_jf < 0)
+		if (wait_jf < 0) {
 			wait_ms = WAIT_MIN_FENCE_TIMEOUT;
-		else
+		} else {
 			wait_ms = min_t(long, WAIT_FENCE_FIRST_TIMEOUT,
 					wait_ms);
+		}
 
 		ret = mdss_wait_sync_fence(fences[i], wait_ms);
 
