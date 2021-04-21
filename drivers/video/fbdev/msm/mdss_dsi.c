@@ -43,11 +43,6 @@ extern void lcd_load_fw(void);
 extern bool is_ilitek_tp;
 #endif
 
-#ifdef CONFIG_TOUCHSCREEN_ILI9882N
-extern void ili_resume_by_ddi(void);
-extern bool is_ilitek_9882n_tp;
-#endif
-
 /* Master structure to hold all the information about the DSI/panel */
 static struct mdss_dsi_data *mdss_dsi_res;
 
@@ -404,9 +399,7 @@ static int mdss_dsi_panel_power_off(struct mdss_panel_data *pdata)
 					__func__);
 	}
 /* bug 450537, wangminglin.wt, 2019/0612, Modify panel timming, start*/
-	if ((strncmp(pdata->panel_info.panel_name, "ft8006p", strlen("ft8006p")) == 0) ||
-        (strncmp(pdata->panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0) ||
-        (strncmp(pdata->panel_info.panel_name, "ili9882n", strlen("ili9882n")) == 0))
+	if ((strncmp(pdata->panel_info.panel_name, "ft8006p", strlen("ft8006p")) == 0) || (strncmp(pdata->panel_info.panel_name, "ili9881h", strlen("ili9881h")) == 0))
 		pr_debug("reset disable: pinctrl not do enabled\n");
 	else {
 		if (mdss_dsi_pinctrl_set_state(ctrl_pdata, false))
@@ -1670,16 +1663,10 @@ pr_info("LCD_LOG: %s   +++ \n", __func__);
 
 end:
 
-#ifdef CONFIG_TOUCHSCREEN_ILI9881H
+    #ifdef CONFIG_TOUCHSCREEN_ILI9881H
 	if(is_ilitek_tp)
 		lcd_load_fw();
-#endif
-
-#ifdef CONFIG_TOUCHSCREEN_ILI9882N
-	if(is_ilitek_9882n_tp)
-		ili_resume_by_ddi();
-#endif
-
+    #endif
 	pr_debug("%s-:\n", __func__);
 /* bug 427908, wangminglin.wt, 2019/0123, Add Lcd debug info, */
 	pr_info("LCD_LOG: %s   --- \n", __func__);
