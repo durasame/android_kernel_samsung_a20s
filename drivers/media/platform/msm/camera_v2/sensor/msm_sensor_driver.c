@@ -19,6 +19,12 @@
 #include "msm_camera_dt_util.h"
 #include "msm_sensor_driver.h"
 #include <linux/hardware_info.h>//bug515614 yinjie1.wt, add,2019/12/02,86118 project camera kernel code for bring up(add hardware info)
+//+bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+#include <linux/of_gpio.h>
+#include <linux/cdev.h>       /* cdev_init */
+#include <linux/platform_device.h>
+//-bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+
 /* Logging macro */
 #undef CDBG
 #define CDBG(fmt, args...) pr_debug(fmt, ##args)
@@ -1017,6 +1023,8 @@ int32_t msm_sensor_driver_probe(void *setting,
 #endif
 //-bug515614 yinjie1.wt, add,2019/12/02,86118 project camera kernel code for bring up
 
+	int32_t gpio_value =0;//bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+
 	int32_t                              rc = 0;
 	struct msm_sensor_ctrl_t            *s_ctrl = NULL;
 	struct msm_camera_cci_client        *cci_client = NULL;
@@ -1403,6 +1411,7 @@ CSID_TG:
 		pr_err("%s power up failed", slave_info->sensor_name);
 		goto free_camera_info;
 	}
+
 //+bug515614 yinjie1.wt, add,2019/12/02,86118 project camera kernel code for bring up
 #ifdef HI1336_BACKMAIN_MATCH_MODULE_INFO
       if(strcmp(slave_info->sensor_name, "hi1336_backmain_TXD") == 0 || strcmp(slave_info->sensor_name, "hi1336_backmain3_truly") == 0)//back main
@@ -1453,6 +1462,23 @@ CSID_TG:
             s_ctrl->sensor_i2c_client->addr_type = addr_temp;
       }
 //-bug515614 yinjie1.wt, add,2019/12/02,86118 project camera kernel code for bring up
+
+      //+bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+      if(strcmp(slave_info->sensor_name, "gc2375h_lhyx") == 0 || strcmp(slave_info->sensor_name, "gc2375h") == 0)//n8 front
+      {
+            gpio_value = gpio_get_value(35);
+            pr_err("gpio35_value = %d  ,camera_info->sensor_id = 0x%X",gpio_value,camera_info->sensor_id);
+            if(gpio_value ==0 && strcmp(slave_info->sensor_name, "gc2375h") == 0)
+                pr_err("gc2375h success");
+            if(gpio_value ==1 && strcmp(slave_info->sensor_name, "gc2375h_lhyx") == 0)
+                pr_err("gc2375h_lhyx success");
+            if(gpio_value ==1 && strcmp(slave_info->sensor_name, "gc2375h") == 0)
+                goto camera_power_down;
+            if(gpio_value ==0 && strcmp(slave_info->sensor_name, "gc2375h_lhyx") == 0)
+                goto camera_power_down;
+      }
+      //-bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+
 	pr_err("%s probe succeeded", slave_info->sensor_name);
 
 	s_ctrl->bypass_video_node_creation =
@@ -1516,7 +1542,22 @@ CSID_TG:
       }else if (!strcmp(probed_info->sensor_name,"gc8034")){
         hardwareinfo_set_prop(HARDWARE_BACK_CAM,"gc8034");
         hardwareinfo_set_prop(HARDWARE_BACK_CAM_MOUDULE_ID,"qunhui");
+      //+bug 538241,huangguoyong.wt,2020.05.28,add hardware info
+      }else if (!strcmp(probed_info->sensor_name,"hi259")){
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM,"hi259");
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM_MOUDULE_ID,"qunhui");
+      //-bug 538241,huangguoyong.wt,2020.05.28,add hardware info
+      //+bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+      }else if (!strcmp(probed_info->sensor_name,"gc2375h_lhyx")){
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM,"gc2375h_lhyx");
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM_MOUDULE_ID,"lianheyx");
+      //-bug 515614,huangguoyong,add, 2020.08.26,N8 project camera kernel code for gc2375h_lhyx bring up
+      //+bug 515614,huangguoyong,add, 2020.08.31,N8 project camera kernel code for bf2253L bring up
+      }else if (!strcmp(probed_info->sensor_name,"bf2253L")){
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM,"bf2253L");
+        hardwareinfo_set_prop(HARDWARE_FRONT_CAM_MOUDULE_ID,"lianheyx_biyadi");
       }
+      //-bug 515614,huangguoyong,add, 2020.08.31,N8 project camera kernel code for bf2253L bring up
 //-bug515614 yinjie1.wt, add,2019/12/02,86118 project camera kernel code for bring up(add hardware info.)
 	/*
 	 * Set probe succeeded flag to 1 so that no other camera shall

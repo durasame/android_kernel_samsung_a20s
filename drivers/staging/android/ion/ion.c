@@ -593,7 +593,10 @@ static struct ion_handle *__ion_alloc(
 		trace_ion_alloc_buffer_start(client->name, heap->name, len,
 				heap_id_mask, flags, client->pid, current->comm,
 					current->pid, (void *)buffer);
+		tracing_mark_begin("%s(%s, %zu, 0x%x, 0x%x)", "ion_alloc",
+				   heap->name, len, heap_id_mask, flags);
 		buffer = ion_buffer_create(heap, dev, len, align, flags);
+		tracing_mark_end();
 		trace_ion_alloc_buffer_end(client->name, heap->name, len,
 				heap_id_mask, flags, client->pid, current->comm,
 					current->pid, (void *)buffer);

@@ -125,7 +125,8 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&gpio_key_active>;
 
-		camera_focus {
+/*+bug538241 ,yinjie1.wt,20200424,modify,forP81081 front camera HI259H bringup*/
+/*		camera_focus {
 			label = "camera_focus";
 			gpios = <&tlmm 128 0x1>;
 			linux,input-type = <1>;
@@ -134,6 +135,8 @@
 			linux,can-disable;
 			gpio-key,wakeup;
 		};
+*/
+/*-bug538241 ,yinjie1.wt,20200424,modify,forP81081 front camera HI259H bringup*/
 
 		camera_snapshot {
 			label = "camera_snapshot";
