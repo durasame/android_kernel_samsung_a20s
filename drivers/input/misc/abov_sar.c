@@ -577,7 +577,9 @@ static void abov_platform_data_of_init(struct i2c_client *client,
 	ret = of_property_read_u32(np, "cap,use_channel_bottom", &cap_channel_bottom);
 
 	//sar_info = of_get_property(np, "label", NULL);
-	strlcpy(Sar_name, "A96T316EW", HARDWARE_MAX_ITEM_LONGTH);
+/*+bug 561421 zhuangzebin.wt,20200610,adjust sar sensor name begin */
+	strlcpy(Sar_name, "A96T346HW", HARDWARE_MAX_ITEM_LONGTH);
+/*-bug 561421 zhuangzebin.wt,20200610,adjust sar sensor name end */
 
 	pplatData->cap_channel_top = (int)cap_channel_top;
 	pplatData->cap_channel_bottom = (int)cap_channel_bottom;

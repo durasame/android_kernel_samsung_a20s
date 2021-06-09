@@ -57,7 +57,7 @@ static unsigned int __is_boot_lpm;
 #ifdef CONFIG_SEC_DEBUG_PWDT
 static unsigned int __is_verifiedboot_state;
 #endif
-
+static bool bootcompleted=false;
 
 static const char *boot_prefix[16] = {
 	BOOT_EVT_PREFIX_LK,
@@ -81,9 +81,6 @@ enum boot_events_type {
 	SYSTEM_START_LK,
 	SYSTEM_LK_LOGO_DISPLAY,
 	SYSTEM_END_LK,
-	SYSTEM_START_UEFI,
-	SYSTEM_START_LINUXLOADER,
-	SYSTEM_START_LINUX,
 	SYSTEM_START_INIT_PROCESS,
 	PLATFORM_START_PRELOAD,
 	PLATFORM_END_PRELOAD,
@@ -439,12 +436,20 @@ void sec_boot_stat_add(const char *c)
 	if (!strncmp(android_log, BOOT_EVT_PREFIX_PLATFORM, 2)) {
 		prefix = EVT_PLATFORM;
 		android_log = (char *)(android_log + 2);
+		if (!strncmp(android_log, "bootcomplete", 12))
+			bootcompleted=true;
 	} else if (!strncmp(android_log, BOOT_EVT_PREFIX_RIL, 7)) {
 		prefix = EVT_RIL;
 		android_log = (char *)(android_log + 7);
 	} else if (!strncmp(android_log, BOOT_EVT_PREFIX_DEBUG, 8)) {
 		prefix = EVT_DEBUG;
 		android_log = (char *)(android_log + 8);
+	} else if (!strncmp(android_log, BOOT_EVT_PREFIX_SYSTEMSERVER, 15)) {
+		prefix = EVT_SYSTEMSERVER;
+		android_log = (char *)(android_log + 15);
+		if (bootcompleted==false)
+			sec_boot_stat_record_systemserver(android_log);
+		return;
 	} else
 		return;
 

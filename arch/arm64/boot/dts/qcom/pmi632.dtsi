@@ -323,7 +323,7 @@
 			qcom,fcc-max-ua = <1500000>;
 			qcom,fv-max-uv = <4400000>;
 			qcom,usb-icl-ua = <1500000>;
-			qcom,otg-cl-ua = <900000>;
+			qcom,otg-cl-ua = <1000000>;
 			qcom,sw-jeita-enable;
 			qcom,chg-term-src = <1>;
 			qcom,chg-term-current-ma = <(-150)>;

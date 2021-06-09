@@ -306,7 +306,19 @@ struct mdp_qseed_cfg_data32 {
 	uint32_t block;
 	struct mdp_qseed_cfg32 qseed_data;
 };
-
+//+ExtBP200508-03502,liuchunyang.wt,add,2020/6/10,add the patch provided by the SS
+#if defined(CONFIG_FB_MSM_MDSS_32BIT)
+struct mdp_dither_cfg_data32 {
+	uint32_t version;
+	uint32_t block;
+	uint32_t flags;
+	uint32_t mode;
+	uint32_t g_y_depth;
+	uint32_t r_cr_depth;
+	uint32_t b_cb_depth;
+	compat_caddr_t cfg_payload;
+};
+#else
 struct mdp_dither_cfg_data32 {
 	uint32_t block;
 	uint32_t flags;
@@ -314,7 +326,8 @@ struct mdp_dither_cfg_data32 {
 	uint32_t r_cr_depth;
 	uint32_t b_cb_depth;
 };
-
+#endif
+//-ExtBP200508-03502,liuchunyang.wt,add,2020/6/10,add the patch provided by the SS
 struct mdp_gamut_data_v1_7_32 {
 	uint32_t mode;
 	uint32_t tbl_size[MDP_GAMUT_TABLE_NUM_V1_7];
@@ -373,6 +386,11 @@ struct mdss_ad_init32 {
 	uint8_t logo_h;
 	uint32_t alpha;
 	uint32_t alpha_base;
+//+ExtBP200508-03502,liuchunyang.wt,add,2020/6/10,add the patch provided by the SS
+#if defined(CONFIG_FB_MSM_MDSS_32BIT)
+	uint32_t al_thresh;
+#endif
+//-ExtBP200508-03502,liuchunyang.wt,add,2020/6/10,add the patch provided by the SS
 	uint32_t bl_lin_len;
 	uint32_t bl_att_len;
 	compat_caddr_t bl_lin;

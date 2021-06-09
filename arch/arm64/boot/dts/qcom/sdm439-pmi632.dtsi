@@ -139,28 +139,8 @@
 		thermal-governor = "step_wise";
 		wake-capable-sensor;
 
-/*+Chk 51013, yangdeqi.wt, MODIFY, 20200416, N8-Modify the thermal thresholds of modem */
+/*+Bug 549537, yangdeqi.wt, MODIFY, 20200426, N8Q-Modify the thermal thresholds of modem and battery */
 		trips {
-			quiet_batt_439_trip1: quiet-batt-trip1 {
-				temperature = <38000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
-			quiet_batt_439_trip2: quiet-batt-trip2 {
-				temperature = <40000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
-			quiet_batt_439_trip3: quiet-batt-trip3 {
-				temperature = <42000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
-			quiet_batt_439_trip4: quiet-batt-trip4 {
-				temperature = <44000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
 			quiet_modem_439_trip1: quiet-modem-trip0 {
 				temperature = <74000>;
 				hysteresis = <4000>;
@@ -171,19 +151,19 @@
 				hysteresis = <4000>;
 				type = "passive";
 			};
-			quiet_batt_439_trip5: quiet-batt-trip5 {
-				temperature = <46000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
-			quiet_439_batt_trip6_mdm_trip3: quiet-bt-trp6-mdm-trp3 {
-				temperature = <48000>;
-				hysteresis = <2000>;
-				type = "passive";
-			};
 			quiet_cpus_439_trip: quiet-cpus-trip {
 				temperature = <48000>;
 				hysteresis = <0>;
+				type = "passive";
+			};
+			quiet_modem_439_trip3: quiet-modem-trip2 {
+				temperature = <78000>;
+				hysteresis = <2000>;
+				type = "passive";
+			};
+			quiet_batt_439_trip1: quiet-batt-trip1 {
+				temperature = <48000>;
+				hysteresis = <4000>;
 				type = "passive";
 			};
 			quiet_gpu_439_trip: quiet-gpu-trip {
@@ -191,14 +171,30 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-			quiet_batt_439_trip7: quiet-batt-trip7 {
+			quiet_batt_439_trip2: quiet-batt-trip2 {
 				temperature = <50000>;
+				hysteresis = <2000>;
+				type = "passive";
+			};
+			quiet_batt_439_trip3: quiet-batt-trip3 {
+				temperature = <52000>;
+				hysteresis = <2000>;
+				type = "passive";
+			};
+
+			quiet_batt_439_trip4: quiet-batt-trip4 {
+				temperature = <54000>;
 				hysteresis = <2000>;
 				type = "passive";
 			};
 			quiet_modem_439_trip4: quiet-modem-trip3 {
 				temperature = <90000>;
 				hysteresis = <4000>;
+				type = "passive";
+			};
+			quiet_batt_439_trip5: quiet-batt-trip5 {
+				temperature = <56000>;
+				hysteresis = <2000>;
 				type = "passive";
 			};
 		};
@@ -264,10 +260,10 @@
 				trip = <&quiet_modem_439_trip2>;
 				cooling-device = <&modem_pa 1 1>;
 			};
-			/*modem_lvl2 {
-				trip = <&quiet_439_batt_trip6_mdm_trip3>;
+			modem_lvl2 {
+				trip = <&quiet_modem_439_trip3>;
 				cooling-device = <&modem_pa 2 2>;
-			};*/
+			};
 			modem_lvl3 {
 				trip = <&quiet_modem_439_trip4>;
 				cooling-device = <&modem_pa 3 3>;
@@ -292,17 +288,8 @@
 				trip = <&quiet_batt_439_trip5>;
 				cooling-device = <&pmi632_charger 5 5>;
 			};
-			battery_lvl6 {
-				trip = <&quiet_439_batt_trip6_mdm_trip3>;
-				cooling-device = <&pmi632_charger 6 6>;
-			};
-			battery_lvl7 {
-				trip = <&quiet_batt_439_trip7>;
-				cooling-device = <&pmi632_charger 7 7>;
-			};
-
 		};
-/*-Chk 51013, yangdeqi.wt, MODIFY, 20200416, N8-Modify the thermal thresholds of modem */
+/*-Bug 549537, yangdeqi.wt, MODIFY, 20200426, N8Q-Modify the thermal thresholds of modem and battery */
 	};
 
 	quiet-therm-adc {

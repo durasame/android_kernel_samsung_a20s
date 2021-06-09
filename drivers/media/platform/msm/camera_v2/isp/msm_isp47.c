@@ -2667,6 +2667,9 @@ int msm_vfe47_set_clk_rate(struct vfe_device *vfe_dev, long *rate)
 	int ret;
 	long clk_rate, prev_clk_rate;
 
+	*rate = 465000000;  //ExtBP200402-03561,liuxingyu.wt,add,2020/04/23,add for isp overflow
+	pr_err("msm_vfe47_set_clk_rate vfe clock is %ld",*rate);
+
 	clk_rate = clk_round_rate(vfe_dev->vfe_clk[clk_idx], *rate);
 	if (vfe_dev->vfe_clk_info[clk_idx].clk_rate == clk_rate)
 		return rc;
@@ -2694,6 +2697,7 @@ int msm_vfe47_set_clk_rate(struct vfe_device *vfe_dev, long *rate)
 		}
 	}
 	/*set vfe clock*/
+	pr_err("msm_vfe47_set_clk_rate set vfe clock is %ld",*rate);
 	rc = msm_camera_clk_set_rate(&vfe_dev->pdev->dev,
 				vfe_dev->vfe_clk[clk_idx], *rate);
 	if (rc < 0)

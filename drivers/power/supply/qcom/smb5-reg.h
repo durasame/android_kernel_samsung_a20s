@@ -284,9 +284,11 @@ enum {
 
 #define USBIN_AICL_OPTIONS_CFG_REG		(USBIN_BASE + 0x80)
 //+Bug 455582,xujianbang.wt,Modify,20190706,(Patch)Handle QC2.0 charger collapse.
-#ifdef CONFIG_ARCH_MSM8953
+//+chk51072 ,liuzhiqing.wt,modify, 2020/04/07,Disable 0x1380 's BIT[3] BIT[7],without adaptor plug into device,device show charging
+//#ifdef CONFIG_ARCH_MSM8953
 #define SUSPEND_ON_COLLAPSE_USBIN_BIT		BIT(7)
-#endif
+//#endif
+//-chk51072 ,liuzhiqing.wt,modify, 2020/04/07,Disable 0x1380 's BIT[3] BIT[7],0x54,without adaptor plug into device,device show charging
 //-Bug 455582,xujianbang.wt,Modify,20190706,(Patch)Handle QC2.0 charger collapse.
 
 #define USBIN_AICL_ADC_EN_BIT			BIT(3)

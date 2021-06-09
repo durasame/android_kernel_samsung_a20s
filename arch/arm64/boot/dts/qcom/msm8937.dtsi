@@ -1162,6 +1162,22 @@
 		};
 	};
 
+//+ExtB P200512-03991,liulai.wt,ADD,20200604,get CPUID
+	sn_fuse: snfuse@0xa0128 {
+		compatible = "qcom,sn-fuse";
+		reg = <0xa0128 0x4>;
+		reg-names = "sn-base";
+	};
+//-ExtB P200512-03991,liulai.wt,ADD,20200604,get CPUID
+
+//+chk54735,liulai.wt,ADD,20200604,get efuse status
+	sec_boot_fuse: secbootfuse@0xa01d0 {
+		compatible = "qcom,sec-boot-fuse";
+		reg = <0xa01d0 0x4>;
+		reg-names = "sec-boot-base";
+	};
+//-chk54735,liulai.wt,ADD,20200604,get efuse status
+
 	jtag_mm0: jtagmm@61bc000 {
 		compatible = "qcom,jtagv8-mm";
 		reg = <0x61bc000 0x1000>;

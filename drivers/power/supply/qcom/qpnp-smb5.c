@@ -2583,7 +2583,7 @@ static int smb5_init_hw(struct smb5 *chip)
                                USBIN_AICL_ADC_EN_BIT|SUSPEND_ON_COLLAPSE_USBIN_BIT, 0);
 #else
 		rc = smblib_masked_write(chg, USBIN_AICL_OPTIONS_CFG_REG,
-				USBIN_AICL_ADC_EN_BIT, 0);
+				USBIN_AICL_ADC_EN_BIT|SUSPEND_ON_COLLAPSE_USBIN_BIT, 0);	//chk51072 ,liuzhiqing.wt,modify, 2020/04/07,Disable 0x1380 's BIT[3] BIT[7],0x54,without adaptor plug into device,device show charging
 #endif
 //-Bug 439935 gudi.wt,ADD,20190716,S86119 without adaptor plug into device,device show charging
 		if (rc < 0) {

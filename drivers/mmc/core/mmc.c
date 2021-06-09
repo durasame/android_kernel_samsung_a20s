@@ -984,6 +984,9 @@ static ssize_t flash_name_show(struct device *dev,
 				emcp_name = "KMQX60013A-B419";
 			else if (strncmp(card->cid.prod_name, "QX63MB", strlen("QX63MB")) == 0)
 				emcp_name = "KMQX60013M-B419";
+			//oa 6555156, lizerong.wt,add,20200828, add flash name
+			else if (strncmp(card->cid.prod_name, "GP6BAB", strlen("GP6BAB")) == 0)
+				emcp_name = "KMGP6001BA-B514";
 			else
 				emcp_name = NULL;
 			break;
